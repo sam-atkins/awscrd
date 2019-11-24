@@ -2,19 +2,44 @@
 
 CLI script which uses boto to get a security credentials as part of using MFA to protect programmatic calls to specific AWS API operations.
 
+- [AWS Get Creds](#aws-get-creds)
+  - [Usage](#usage)
+  - [Install](#install)
+  - [Documentation Links](#documentation-links)
+
 ## Usage
 
-placeholder
+```bash
+awscrd -p {profile name} -t {MFA token}
+```
 
 ## Install
 
-placeholder
+AWS credentials are assumed to be in `~./aws/credentials` per standard guidance from AWS. Refer to the [docs](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) for info.
 
-## WIP Notes
+Session token and other security credentials are written to `~/.creds` which suits my workflow at Big Health.
 
-### Docs
-https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sts.html#STS.Client.get_session_token
+These file locations can be changed in `./awscrd/conf.py`.
 
-https://docs.python.org/3/library/configparser.html
+```bash
+# create a venv
+virtualenv -p python3.7 venv
 
-https://click.palletsprojects.com/en/7.x/setuptools/#setuptools-integration
+# activate the venv
+source venv/bin/activate
+
+# install dependencies
+poetry install
+```
+
+To bundle your script with setuptools run:
+
+```bash
+pip install --editable .
+```
+
+## Documentation Links
+
+- [boto STS](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sts.html#STS.Client.get_session_token)
+- [Python config parser](https://docs.python.org/3/library/configparser.html)
+- [Click docs re setuptools integration](https://click.palletsprojects.com/en/7.x/setuptools/#setuptools-integration)
