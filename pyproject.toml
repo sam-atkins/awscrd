@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "awscrd"
+version = "0.1.0"
+description = "CLI script to get AWS security credentials"
+authors = ["Sam Atkins <samatkins@outlook.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+boto3 = "^1.10"
+click = "^7.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+flake8 = "^3.7"
+mypy = "^0.740.0"
+pylint = "^2.4"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
