@@ -14,6 +14,6 @@ setup(
     author_email="samatkins@outlook.com",
     packages=find_packages(),
     include_package_data=True,
-    install_requires=["boto3", "Click"],
+    install_requires=["boto3>=1.10", "Click==7.0"],
     entry_points={"console_scripts": ["awscrd=awscrd.main:main"]},
 )

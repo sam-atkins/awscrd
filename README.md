@@ -32,10 +32,16 @@ source venv/bin/activate
 poetry install
 ```
 
-To bundle your script with setuptools run:
+To bundle your script with setuptools for dev purposes run:
 
 ```bash
 pip install --editable .
+```
+
+To setup the script to run from any directory, run this in your home directory:
+
+```
+pip3 install --editable /Users/{username}/path/to/awscrd
 ```
 
 ## Documentation Links
