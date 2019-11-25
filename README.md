@@ -1,6 +1,6 @@
 # AWS Get Creds
 
-CLI script which uses boto to get a security credentials as part of using MFA to protect programmatic calls to specific AWS API operations.
+CLI script to get security credentials as part of using MFA to protect programmatic calls to specific AWS API operations.
 
 - [AWS Get Creds](#aws-get-creds)
   - [Usage](#usage)
