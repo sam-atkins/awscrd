@@ -2,7 +2,6 @@
 Parses user profile info from a config file
 """
 import configparser
-import sys
 from typing import Tuple
 
 
@@ -23,8 +22,7 @@ def profile_from_config(profile: str, input_file_path: str) -> Tuple[str, str]:
     try:
         profile_section = config[profile]
     except KeyError:
-        print(f"Unable to find profile {profile} in AWS credentials file")
-        sys.exit(1)
+        raise KeyError(f"Unable to find profile {profile} in AWS credentials file")
 
     aws_iam_account_number = profile_section.get("aws_iam_account_number")
     username = profile_section.get("username")
