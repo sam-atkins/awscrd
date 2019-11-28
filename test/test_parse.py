@@ -5,7 +5,7 @@ from awscrd.parse import profile_from_config
 
 def test_parse_profile_from_config_returns_creds_tuple():
     profile = "test"
-    input_test_creds_file = "./tests/data/test_creds"
+    input_test_creds_file = "./test/data/test_creds"
     account_number, username = profile_from_config(
         profile=profile, input_file_path=input_test_creds_file
     )
