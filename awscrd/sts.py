@@ -7,6 +7,23 @@ import sys
 from typing import Mapping
 
 
+def _get_security_creds(arn: str, token: str) -> Mapping[str, str]:
+    """
+    Request to STS to get security credentials including a session token
+
+    Args:
+        arn (str): the arn required to identify the account and user
+        token (str): MFA token
+
+    Returns:
+        Mapping[str, str]: STS response
+    """
+    client = boto3.client("sts")
+    return client.get_session_token(
+        DurationSeconds=129600, SerialNumber=arn, TokenCode=token
+    )
+
+
 def get_token(
     token: str, aws_iam_account_number: str, username: str
 ) -> Mapping[str, str]:
@@ -22,14 +39,10 @@ def get_token(
     Returns:
         Mapping: Credentials from the STS response
     """
-    client = boto3.client("sts")
-
     arn_string = f"arn:aws:iam::{aws_iam_account_number}:mfa/{username}"
 
     try:
-        response = client.get_session_token(
-            DurationSeconds=129600, SerialNumber=arn_string, TokenCode=token
-        )
+        response = _get_security_creds(arn=arn_string, token=token)
     # TODO(sam) narrow down to boto exception
     except Exception as ex:
         print(f"❌ Request to STS failed: {ex}")
