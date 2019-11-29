@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/circleci
+    docker:
+      # CircleCI Python images available at: https://hub.docker.com/r/circleci/python/
+      - image: circleci/python:3.7
+
+    steps:
+      - checkout
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
+      - restore_cache:
+          key: requirements_1-{{ .Branch }}-{{ checksum "poetry.lock"}}
+      - run:
+          command: |
+            poetry install
+      - save_cache:
+          key: requirements_1-{{ .Branch}}-{{ checksum "poetry.lock"}}
+          paths:
+            - /home/circleci/.cache/pypoetry/virtualenvs
+      - run:
+          name: run tests
+          command: |
+            poetry run pytest -vv
+      - run:
+          name: coverage report
+          command: |
+            poetry run pytest -vv --cov=awscrd test/
+      - run:
+          name: generate coverage reports
+          command: poetry run coverage html -d artifacts
+      - store_artifacts:
+          path: artifacts
+          destination: cov
