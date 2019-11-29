@@ -1,9 +1,9 @@
 # AWS Get Creds
 
-CLI script to get security credentials as part of using MFA to protect programmatic calls to specific AWS API operations.
-
 [![CircleCI](https://circleci.com/gh/sam-atkins/awscrd-cli.svg?style=svg)](https://circleci.com/gh/sam-atkins/awscrd-cli)
 <a href="https://github.com/ambv/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+
+CLI script to get security credentials as part of using MFA to protect programmatic calls to specific AWS API operations.
 
 - [AWS Get Creds](#aws-get-creds)
   - [Usage](#usage)
