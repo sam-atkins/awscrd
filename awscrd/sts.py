@@ -4,7 +4,7 @@ Security Token Service (STS)
 """
 import boto3
 import sys
-from typing import Mapping
+from typing import Mapping, Optional
 
 
 def _get_security_creds(arn: str, token: str) -> Mapping[str, str]:
@@ -26,7 +26,7 @@ def _get_security_creds(arn: str, token: str) -> Mapping[str, str]:
 
 def get_token(
     token: str, aws_iam_account_number: str, username: str
-) -> Mapping[str, str]:
+) -> Optional[Mapping[str, str]]:
     """
     Uses boto to make a request to STS to get a session token and other security
     credentials
@@ -43,7 +43,6 @@ def get_token(
 
     try:
         response = _get_security_creds(arn=arn_string, token=token)
-    # TODO(sam) narrow down to boto exception
     except Exception as ex:
         print(f"❌ Request to STS failed: {ex}")
         sys.exit(1)
