@@ -3,6 +3,8 @@ Write to output file
 """
 from typing import Mapping
 
+from awscrd.conf import AWS_DEFAULT_REGION
+
 
 def creds_to_output_file(creds: Mapping, output_file_path: str, mode="w"):
     """
@@ -21,3 +23,4 @@ def creds_to_output_file(creds: Mapping, output_file_path: str, mode="w"):
         print(f"export AWS_ACCESS_KEY_ID={aws_access_key_id}", file=text_file)
         print(f"export AWS_SECRET_ACCESS_KEY={aws_secret_access_key}", file=text_file)
         print(f"export AWS_SESSION_TOKEN={aws_session_token}", file=text_file)
+        print(f"export AWS_DEFAULT_REGION={AWS_DEFAULT_REGION}", file=text_file)
