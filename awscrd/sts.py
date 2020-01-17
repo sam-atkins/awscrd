@@ -3,6 +3,9 @@ Interface via Boto3 to a low-level client representing AWS
 Security Token Service (STS)
 """
 import boto3
+from boto3.exceptions import Boto3Error
+from botocore.exceptions import ClientError
+
 import sys
 from typing import Mapping, Optional
 
@@ -43,7 +46,7 @@ def get_token(
 
     try:
         response = _get_security_creds(arn=arn_string, token=token)
-    except Exception as ex:
+    except (Boto3Error, ClientError) as ex:
         print(f"❌ Request to STS failed: {ex}")
         sys.exit(1)
 

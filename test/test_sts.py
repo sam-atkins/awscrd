@@ -1,6 +1,7 @@
 from unittest.mock import patch
 
 import pytest
+from boto3.exceptions import Boto3Error
 
 from awscrd.sts import get_token
 
@@ -55,7 +56,7 @@ def test_get_sts_returns_creds_dict(mock_boto):
     }
 
 
-@patch("awscrd.sts._get_security_creds", side_effect=Exception)
+@patch("awscrd.sts._get_security_creds", side_effect=Boto3Error)
 def test_get_sts_exception_causes_sys_exit(mock_boto):
     with pytest.raises(SystemExit):
         token = "123456"
